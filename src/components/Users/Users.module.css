@@ -1,0 +1,76 @@
+.userPhoto {
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+}
+
+.userBlock {
+  margin: 20px;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.userLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+}
+
+.name {
+  font-weight: bold;
+  font-size: larger;
+}
+
+.status {
+  font-style: italic;
+  font-size: larger;
+}
+
+.selectedPage {
+  font-weight: bold;
+}
+
+.pages {
+  cursor: pointer;
+  margin: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: rgb(76, 5, 124);
+  justify-content: space-evenly;
+}
+.buttonFollow {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  min-width: 150px;
+  background-color: rgb(119, 79, 165);
+  border: none;
+  color: white;
+  border-radius: 6px;
+   font-size: larger;
+   font-weight: bold;
+}
+.buttonUnollow {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  min-width: 150px;
+  background-color: rgb(76, 5, 124);
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-size: larger;
+  font-weight: bold;
+}
+.arrow {
+  border: none;
+  font-size: 24px;
+  color: rgb(38, 3, 61);
+  background-color: white;
+}

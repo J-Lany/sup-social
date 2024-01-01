@@ -1,0 +1,24 @@
+
+.item {
+    color: rgb(48, 19, 114);
+    text-decoration: none;
+  }
+
+  .person {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 5px;
+    font-weight: 600;
+    font-size: 20px;
+  }
+  .active {
+    color: rgb(135, 117, 150);
+    text-decoration: none;
+  }
+
+  .item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+  }
