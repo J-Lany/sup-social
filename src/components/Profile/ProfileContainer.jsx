@@ -29,17 +29,25 @@ export function withRouter(Component) {
 }
 
 class ProfileContainer extends React.Component {
-
-    componentDidMount() {
-        let userId = this.props.router.params.userId;
+refreshProfile = () => {
+    let userId = this.props.router.params.userId;
+    if (!userId) {
+        userId = this.props.authorizedUserId
         if (!userId) {
-            userId = this.props.authorizedUserId
-            if (!userId) {
-                this.props.history.push("/login")
-            }
+            this.props.history.push("/login")
         }
-        this.props.getProfile(userId)
-        this.props.getStatus(userId)
+    }
+    this.props.getProfile(userId)
+    this.props.getStatus(userId)
+}
+    componentDidMount() {
+        this.refreshProfile()
+    }
+
+    componentDidUpdate(prevProps, prevState, snap) {
+     if(this.props.router.params.userId !== prevProps.router.params.userId ){
+        this.refreshProfile()
+     }
     }
 
     render() {
