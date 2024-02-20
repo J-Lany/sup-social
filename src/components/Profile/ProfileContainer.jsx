@@ -1,7 +1,7 @@
 import React from "react";
 import Profile from "./Profile"
 import { connect } from "react-redux";
-import { getProfile, getStatus, updateStatus } from "../../redux/profile-reducer";
+import { getProfile, getStatus, updateStatus, savePhoto } from "../../redux/profile-reducer";
 import {
     useLocation,
     useNavigate,
@@ -29,30 +29,37 @@ export function withRouter(Component) {
 }
 
 class ProfileContainer extends React.Component {
-refreshProfile = () => {
-    let userId = this.props.router.params.userId;
-    if (!userId) {
-        userId = this.props.authorizedUserId
+    refreshProfile = () => {
+        let userId = this.props.router.params.userId;
         if (!userId) {
-            this.props.history.push("/login")
+            userId = this.props.authorizedUserId
+            if (!userId) {
+                this.props.history.push("/login")
+            }
         }
+        this.props.getProfile(userId)
+        this.props.getStatus(userId)
     }
-    this.props.getProfile(userId)
-    this.props.getStatus(userId)
-}
     componentDidMount() {
         this.refreshProfile()
     }
 
     componentDidUpdate(prevProps, prevState, snap) {
-     if(this.props.router.params.userId !== prevProps.router.params.userId ){
-        this.refreshProfile()
-     }
+        if (this.props.router.params.userId !== prevProps.router.params.userId) {
+            this.refreshProfile()
+        }
     }
 
     render() {
         return (
-            <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus} />
+            <Profile
+                {...this.props}
+                profile={this.props.profile}
+                status={this.props.status}
+                updateStatus={this.props.updateStatus}
+                isOwner={!this.props.router.params.userId}
+                savePhoto={this.props.savePhoto}
+            />
         )
     }
 }
@@ -67,7 +74,7 @@ let mapStateToPops = (state) => {
 }
 
 export default compose(
-    connect(mapStateToPops, { getProfile, getStatus, updateStatus }),
+    connect(mapStateToPops, { getProfile, getStatus, updateStatus, savePhoto }),
     withRouter,
     withAuthRedirect
 )(ProfileContainer)

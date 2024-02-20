@@ -24,6 +24,9 @@ const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileCo
 const UsersContainer = React.lazy(() => import("./components/Users/UsersContainer"))
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   componentDidMount() {
     this.props.initializeApp();
   }
@@ -32,17 +35,16 @@ class App extends React.Component {
     if (!this.props.initialized) {
       return <Preloader />
     }
-
     return (
       <BrowserRouter basename={process.env.PUBLIC_URL}>
-        <div className="app-wrapper">
+        <div onClick={this.onClick} ref={this.divRef} className="app-wrapper">
           <HeaderContainer />
           <Nav />
           <div className="app-wrapper-content">
             <Routes>
               <Route path="/profile/:userId?" element={<React.Suspense fallback={<Preloader />}><ProfileContainer /></React.Suspense>} />
               <Route path="/users/*" element={<React.Suspense fallback={<Preloader />}><UsersContainer /></React.Suspense>} />
-              <Route path="/dialogs/*" element={<React.Suspense fallback={<Preloader />}><DialogsContainer /></React.Suspense> } />
+              <Route path="/dialogs/*" element={<React.Suspense fallback={<Preloader />}><DialogsContainer /></React.Suspense>} />
               <Route path="/news/*" element={<News />} />
               <Route path="/music/*" element={<Music />} />
               <Route path="/settings/*" element={<Settings />} />

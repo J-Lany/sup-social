@@ -9,9 +9,10 @@ export const getUsersList = (state) => {
 //   return getUsersList(state).filter(u => true)
 // }
 
-export const getUserSuper = createSelector(getUsersList,(users) => {//Для примера применения реселекторов
-  return users.filter(u => true )
-});
+export const getUserSuper = createSelector(
+  getUsersList,
+  getUsersList,
+  (users, users2) =>  users.filter(u => true));
 
 export const getPageSize = (state) => {
   return state.usersPage.pageSize;
